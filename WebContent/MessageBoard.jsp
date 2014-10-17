@@ -56,22 +56,30 @@ body {
 	-webkit-border-radius: 15px;
 	border-radius: 15px;
 	width: 550px;
-	margin:10px auto;
+	margin: 10px auto;
 	padding: 5px 10px;
 }
 </style>
 </head>
 <body>
-	<span>当前用户${currentUser}</span>
+	当前用户<span style="color: blue;font-size: 20px;">${currentUser}</span>
 	<br>
 	<br>
 
 	<div>
 		留言板:<br>
-		<textarea name="msgContent" rows="3" cols="10" style="width: 400px;"></textarea>
-		<a href="#">留言</a>
+		<form action="MessageServlet">
+			<input type="hidden" name="from" value="${currentUser}"> <input
+				type="hidden" name="type" value="addCatagory">
+			<textarea name="msgContent" rows="3" cols="10" style="width: 400px;"></textarea>
+			<input type="submit" value="留言">
+		</form>
 	</div>
 	<br>
+
+	<c:if test="${catagories.size()<=0}">
+		<div>暂时没有留言，你可以做第一个留言者。</div>
+	</c:if>
 	<div class="msgs">
 
 		<c:forEach items="${catagories}" var="c">
@@ -90,11 +98,15 @@ body {
 					</div>
 				</c:forEach>
 				<br>
-				<div>
-					<textarea rows="1" cols="10"
+				<form action="MessageServlet">
+					<input type="hidden" name="type" value="addMsg"> <input
+						type="hidden" name="from" value="${currentUser}">
+						<input type="hidden" name="cid" value="${c.id}">
+
+					<textarea name="content" rows="1" cols="10"
 						style="height: 30px; width: 400; margin-top: 5px;"></textarea>
-					<a href="">开始扯淡</a>
-				</div>
+					<input type="submit" value="开始扯淡">
+				</form>
 			</div>
 		</c:forEach>
 

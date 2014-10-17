@@ -18,7 +18,7 @@ public class ListMessageServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-
+		request.setCharacterEncoding("utf-8");
 		Connection conn = DBUtils.getConnection();
 		List<Catagory> catagories = null;
 		try {
@@ -30,6 +30,8 @@ public class ListMessageServlet extends HttpServlet {
 		}
 
 		request.setAttribute("catagories", catagories);
+		request.getRequestDispatcher("/MessageBoard.jsp").forward(request,
+				response);
 	}
 
 	protected void doPost(HttpServletRequest request,

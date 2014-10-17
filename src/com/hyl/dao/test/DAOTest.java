@@ -9,6 +9,7 @@ import com.hyl.DBUtils;
 import com.hyl.dao.CatagoryDAOImpl;
 import com.hyl.dao.MessageDAOImpl;
 import com.hyl.dao.UserDAOImpl;
+import com.hyl.model.Catagory;
 import com.hyl.model.Message;
 import com.hyl.model.User;
 
@@ -45,5 +46,13 @@ public class DAOTest {
 	@Test
 	public void testCatagory(){
 		System.out.println(new CatagoryDAOImpl(conn).doListCatagories());
+	}
+	
+	
+	@Test
+	public void testAddCatagory(){
+		Catagory c=new Catagory(0);
+		c.setDesc("sssssssssssssss");
+		System.out.println(new CatagoryDAOImpl(conn).addCatagory(c));
 	}
 }

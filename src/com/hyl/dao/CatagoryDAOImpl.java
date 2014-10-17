@@ -43,15 +43,15 @@ public class CatagoryDAOImpl {
 
 	private List<Catagory> getCatagoryOnly() {
 		List<Catagory> ids = new ArrayList<>();
-		String sql="select id,dsc from catagory";
-		PreparedStatement ps=null;
-		ResultSet rs=null;
+		String sql = "select id,dsc from catagory";
+		PreparedStatement ps = null;
+		ResultSet rs = null;
 		try {
-			ps=this.conn.prepareStatement(sql);
-			rs=ps.executeQuery();
-			Catagory c=null;
-			while(rs.next()){
-				c=new Catagory();
+			ps = this.conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			Catagory c = null;
+			while (rs.next()) {
+				c = new Catagory();
 				c.setId(rs.getInt(1));
 				c.setDesc(rs.getString(2));
 				ids.add(c);
@@ -60,5 +60,32 @@ public class CatagoryDAOImpl {
 			e.printStackTrace();
 		}
 		return ids;
+	}
+
+	public synchronized int addCatagory(Catagory c) {
+		String sql="insert into catagory (id,dsc) values"
+				+ " (null,?)";
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+		
+		try {
+			ps=conn.prepareStatement(sql);
+			ps.setString(1, c.getDesc());
+			if(ps.executeUpdate()>0){
+				sql="select max(id) from catagory";
+				ps=conn.prepareStatement(sql);
+				rs=ps.executeQuery();
+				if(rs.next()){
+					return rs.getInt(1);
+				}
+			}
+			else{
+				return -1;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return -1;
 	}
 }
