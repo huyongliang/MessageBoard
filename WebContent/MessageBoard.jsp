@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
@@ -12,9 +14,10 @@
 <base href="<%=basePath%>">
 <title>标题</title>
 <style type="text/css">
-body{
+body {
 	text-align: center;
 }
+
 .msgBody {
 	text-align: right;
 	padding-bottom: 5px;
@@ -28,7 +31,7 @@ body{
 
 .round {
 	padding: 10px;
-	border: 5px solid blue;
+	border: 3px solid blue;
 	-moz-border-radius: 15px;
 	-webkit-border-radius: 15px;
 	border-radius: 15px;
@@ -45,41 +48,56 @@ body{
 	padding-top: 5px;
 	margin-bottom: 5px;
 }
+
+.msgs {
+	padding: 10px;
+	border: 1px solid blue;
+	-moz-border-radius: 15px;
+	-webkit-border-radius: 15px;
+	border-radius: 15px;
+	width: 550px;
+	margin:10px auto;
+	padding: 5px 10px;
+}
 </style>
 </head>
-<body >
+<body>
 	<span>当前用户${currentUser}</span>
 	<br>
 	<br>
 
 	<div>
 		留言板:<br>
-		<textarea rows="3" cols="10" style="width: 400px;"></textarea>
+		<textarea name="msgContent" rows="3" cols="10" style="width: 400px;"></textarea>
 		<a href="#">留言</a>
 	</div>
 	<br>
-	<div>
+	<div class="msgs">
 
-		<div class="round catagory">
-			<br> <span>第1楼(</span><span style="color: blue">张三</span>)
-			<div class="msg">
-				<div class="msgBody">你大爷来看你了</div>
-				<div class="msgTime">2012-12-12 12:12:12</div>
-			</div>
-			<div class="msgOfMine">
-
-				<div class="msgOfMineBody">
-					<span style="color: blue">我：</span>我是你爷爷
+		<c:forEach items="${catagories}" var="c">
+			<div class="round catagory">
+				<div style="text-align: left; font-size: 20px;">
+					<span>第${c.id}楼(</span><span style="color: blue">${c.desc}</span>)
 				</div>
-				<div class="msgOfMineTime">2012-12-12 12:12:12</div>
+				<c:forEach items="${c.messages}" var="m">
+					<div class="msg">
+						<div class="msgBody">
+							<div style="text-align: left;">${m.from}:</div>
+							<div style="padding: 5px 10px;">${m.content}</div>
+						</div>
+						<div class="msgTime">${m.time }</div>
+						<hr style="color: green;">
+					</div>
+				</c:forEach>
+				<br>
+				<div>
+					<textarea rows="1" cols="10"
+						style="height: 30px; width: 400; margin-top: 5px;"></textarea>
+					<a href="">开始扯淡</a>
+				</div>
 			</div>
+		</c:forEach>
 
-			<div>
-				<textarea rows="1" cols="10"
-					style="height: 30px; width: 400; margin-top: 5px;"></textarea>
-				<a href="">回复</a>
-			</div>
-		</div>
 	</div>
 </body>
 </html>

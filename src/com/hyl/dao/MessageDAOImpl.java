@@ -49,7 +49,7 @@ public class MessageDAOImpl implements MessageDAO {
 	public List<Message> doList() {
 		List<Message> list = new ArrayList<>();
 		String sql = "select id,catagoryId,from_,to_,content,time_ from message"
-				+ " order by time_";
+				+ " order by  catagoryId, time_";
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 

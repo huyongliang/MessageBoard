@@ -22,4 +22,14 @@
     <servlet-name>LoginServlet</servlet-name>
     <url-pattern>/LoginServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ListMessageServlet</display-name>
+    <servlet-name>ListMessageServlet</servlet-name>
+    <servlet-class>com.hyl.controllers.ListMessageServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ListMessageServlet</servlet-name>
+    <url-pattern>/ListMessageServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

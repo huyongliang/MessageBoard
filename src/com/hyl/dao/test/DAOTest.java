@@ -6,6 +6,7 @@ import java.util.Date;
 import org.junit.Test;
 
 import com.hyl.DBUtils;
+import com.hyl.dao.CatagoryDAOImpl;
 import com.hyl.dao.MessageDAOImpl;
 import com.hyl.dao.UserDAOImpl;
 import com.hyl.model.Message;
@@ -38,5 +39,11 @@ public class DAOTest {
 	public void testAddUser() {
 		System.out.println(new UserDAOImpl(conn)
 				.doCreate(new User("sss", "sss")));
+	}
+	
+	
+	@Test
+	public void testCatagory(){
+		System.out.println(new CatagoryDAOImpl(conn).doListCatagories());
 	}
 }
