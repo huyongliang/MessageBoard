@@ -44,27 +44,31 @@
 </style>
 </head>
 <body>
+	<span>当前用户${currentUser}</span>
 	<br>
 	<br>
 	<br>
-	<div class="round catagory">
-		<br> <span>第1楼(</span><span style="color: blue">张三</span>)
-		<div class="msg">
-			<div class="msgBody">你大爷来看你了</div>
-			<div class="msgTime">2012-12-12 12:12:12</div>
-		</div>
-		<div class="msgOfMine">
+	<div>
 
-			<div class="msgOfMineBody">
-				<span style="color: blue">我：</span>我是你爷爷
+		<div class="round catagory">
+			<br> <span>第1楼(</span><span style="color: blue">张三</span>)
+			<div class="msg">
+				<div class="msgBody">你大爷来看你了</div>
+				<div class="msgTime">2012-12-12 12:12:12</div>
 			</div>
-			<div class="msgOfMineTime">2012-12-12 12:12:12</div>
-		</div>
+			<div class="msgOfMine">
 
-		<div>
-			<textarea rows="1" cols="10"
-				style="height: 30px; width: 400; margin-top: 5px;"></textarea>
-			<a href="">回复</a>
+				<div class="msgOfMineBody">
+					<span style="color: blue">我：</span>我是你爷爷
+				</div>
+				<div class="msgOfMineTime">2012-12-12 12:12:12</div>
+			</div>
+
+			<div>
+				<textarea rows="1" cols="10"
+					style="height: 30px; width: 400; margin-top: 5px;"></textarea>
+				<a href="">回复</a>
+			</div>
 		</div>
 	</div>
 </body>
