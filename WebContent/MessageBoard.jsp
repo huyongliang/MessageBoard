@@ -12,6 +12,9 @@
 <base href="<%=basePath%>">
 <title>标题</title>
 <style type="text/css">
+body{
+	text-align: center;
+}
 .msgBody {
 	text-align: right;
 	padding-bottom: 5px;
@@ -33,6 +36,7 @@
 
 .catagory {
 	width: 500px;
+	margin: 5px auto;
 }
 
 .msgOfMineBody {
@@ -43,10 +47,16 @@
 }
 </style>
 </head>
-<body>
+<body >
 	<span>当前用户${currentUser}</span>
 	<br>
 	<br>
+
+	<div>
+		留言板:<br>
+		<textarea rows="3" cols="10" style="width: 400px;"></textarea>
+		<a href="#">留言</a>
+	</div>
 	<br>
 	<div>
 

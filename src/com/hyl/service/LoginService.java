@@ -1,7 +1,8 @@
-package com.hyl;
+package com.hyl.service;
 
 import java.sql.Connection;
 
+import com.hyl.DBUtils;
 import com.hyl.dao.UserDAOImpl;
 import com.hyl.model.User;
 
