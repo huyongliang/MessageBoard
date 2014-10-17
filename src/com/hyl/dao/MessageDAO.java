@@ -5,7 +5,7 @@ import java.util.List;
 import com.hyl.model.Message;
 
 public interface MessageDAO {
-	boolean doCreate();
+	boolean doCreate(Message message);
 
 	List<Message> doList();
 }

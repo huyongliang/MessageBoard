@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class Message {
 	private int id;
+	private int catagoryId;
 	private String from;
 	private String to;
 	private String content;
@@ -11,6 +12,17 @@ public class Message {
 
 	public Message() {
 		super();
+	}
+
+	public Message(int id, int catagoryId, String from, String to,
+			String content, Date time) {
+		super();
+		this.id = id;
+		this.catagoryId = catagoryId;
+		this.from = from;
+		this.to = to;
+		this.content = content;
+		this.time = time;
 	}
 
 	public String getFrom() {
@@ -51,6 +63,21 @@ public class Message {
 
 	public void setContent(String content) {
 		this.content = content;
+	}
+
+	public int getCatagoryId() {
+		return catagoryId;
+	}
+
+	public void setCatagoryId(int catagoryId) {
+		this.catagoryId = catagoryId;
+	}
+
+	@Override
+	public String toString() {
+		return "Message [id=" + id + ", catagoryId=" + catagoryId + ", from="
+				+ from + ", to=" + to + ", content=" + content + ", time="
+				+ time + "]";
 	}
 
 }
