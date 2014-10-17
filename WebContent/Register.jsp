@@ -10,7 +10,6 @@
 <html>
 <head>
 <base href="<%=basePath%>">
-<title>标题</title>
 
 <style type="text/css">
 .main {
@@ -24,15 +23,16 @@
 	margin: 150px auto;
 }
 </style>
+<title>标题</title>
 </head>
 <body>
-	<div class="main">
-		<h1>登陆</h1>
-		<form action="LoginServlet" method="post">
-			用户名:<input type="text" name="userName"><br> <br>
-			密&nbsp;&nbsp;码:<input type="password" name="password"><br><br>
-			<input type="submit" value="登陆">
-			<a href="Register.jsp">注册</a>
+	<div class="main" style="width: 500px; margin: 100px auto;">
+		<h1>用户注册</h1>
+		<form action="RegisterServlet" method="post">
+			用户名:&nbsp;<input type="text" name="userName"><br> <br>
+			密&nbsp;&nbsp;&nbsp;码:<input type="password" name="password"><br>
+			重复密码:<input type="password" name="repassword"><br> <br>
+			<input type="submit" value="注册"><a href="index.jsp">返回登录界面</a>
 		</form>
 	</div>
 </body>

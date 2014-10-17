@@ -19,14 +19,14 @@ body {
 }
 
 .msgBody {
-	text-align: right;
+	/* text-align: right; */
 	padding-bottom: 5px;
 	padding-top: 5px;
 	margin-bottom: 5px;
 }
 
 .msgTime {
-	text-align: right;
+	/* text-align: right; */
 }
 
 .round {
@@ -59,10 +59,19 @@ body {
 	margin: 10px auto;
 	padding: 5px 10px;
 }
+
+.left {
+	text-align: left;
+}
+
+.right {
+	text-align: right;
+}
 </style>
 </head>
 <body>
-	当前用户<span style="color: blue;font-size: 20px;">${currentUser}</span>
+	当前用户
+	<span style="color: blue; font-size: 20px;">${currentUser}</span>
 	<br>
 	<br>
 
@@ -81,27 +90,56 @@ body {
 		<div>暂时没有留言，你可以做第一个留言者。</div>
 	</c:if>
 	<div class="msgs">
-
+		<c:set var="index" scope="page" value="0"></c:set>
 		<c:forEach items="${catagories}" var="c">
 			<div class="round catagory">
 				<div style="text-align: left; font-size: 20px;">
 					<span>第${c.id}楼(</span><span style="color: blue">${c.desc}</span>)
 				</div>
+
+
 				<c:forEach items="${c.messages}" var="m">
-					<div class="msg">
-						<div class="msgBody">
-							<div style="text-align: left;">${m.from}:</div>
-							<div style="padding: 5px 10px;">${m.content}</div>
-						</div>
-						<div class="msgTime">${m.time }</div>
-						<hr style="color: green;">
-					</div>
+
+
+
+					
+					<c:choose>
+						<c:when test="${index%2==0}">
+
+							<div class="msg left">
+								<div class="msgBody">
+									<div style="color: blue">${m.from}:</div>
+									<div style="padding: 5px 10px;">${m.content}</div>
+								</div>
+								<div class="msgTime">${m.time }</div>
+								<hr style="color: green;">
+							</div>
+						</c:when>
+						<c:otherwise>
+
+							<div class="msg right">
+								<div class="msgBody">
+									<div style="color: blue">${m.from}:</div>
+									<div style="padding: 5px 10px;">${m.content}</div>
+								</div>
+								<div class="msgTime">${m.time }</div>
+								<hr style="color: green;">
+							</div>
+
+						</c:otherwise>
+
+					</c:choose>
+					<c:set var="index" value="${index+1}"></c:set>
+
+
+
+
 				</c:forEach>
 				<br>
 				<form action="MessageServlet">
 					<input type="hidden" name="type" value="addMsg"> <input
-						type="hidden" name="from" value="${currentUser}">
-						<input type="hidden" name="cid" value="${c.id}">
+						type="hidden" name="from" value="${currentUser}"> <input
+						type="hidden" name="cid" value="${c.id}">
 
 					<textarea name="content" rows="1" cols="10"
 						style="height: 30px; width: 400; margin-top: 5px;"></textarea>
