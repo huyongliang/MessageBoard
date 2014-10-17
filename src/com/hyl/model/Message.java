@@ -1,5 +1,5 @@
 package com.hyl.model;
 
 public class Message {
-//ddddd
+	private String name;
 }
