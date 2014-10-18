@@ -24,15 +24,30 @@
 	margin: 150px auto;
 }
 </style>
+<script type="text/javascript" src="js/jquery-1.10.2.js"></script>
+<script type="text/javascript">
+	$(function() {
+		$("#loginButton").click(
+				function() {
+					var userName = $("#userName").val();
+					var password = $("#password").val();
+					if (userName == null || userName == "" || password == null
+							|| password == "") {
+						alert("用户名或密码输入不合法");
+						return false;
+					}
+				});
+	});
+</script>
 </head>
 <body>
 	<div class="main">
 		<h1>登陆</h1>
 		<form action="LoginServlet" method="post">
-			用户名:<input type="text" name="userName"><br> <br>
-			密&nbsp;&nbsp;码:<input type="password" name="password"><br><br>
-			<input type="submit" value="登陆">
-			<a href="Register.jsp">注册</a>
+			用户名:<input id="userName" type="text" name="userName"><br>
+			<br> 密&nbsp;&nbsp;码:<input id="password" type="password"
+				name="password"><br> <br> <input type="submit"
+				value="登陆" id="loginButton"> <a href="Register.jsp">注册</a>
 		</form>
 	</div>
 </body>

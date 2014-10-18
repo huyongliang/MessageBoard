@@ -26,7 +26,8 @@ public class LoginServlet extends HttpServlet {
 		
 			response.sendRedirect("ListMessageServlet");
 		} else {
-			response.getWriter().println("用户名或密码错误");
+			response.getWriter().println("用户名或密码错误<br>");
+			response.getWriter().println("<a href=\"index.jsp\">返回登录</a>");
 		}
 	}
 

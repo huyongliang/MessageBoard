@@ -16,7 +16,7 @@
 <style type="text/css">
 body {
 	text-align: center;
-	background-image: url("img/bg_blank.png");
+	/* background-image: url("img/bg_blank.png"); */
 }
 
 .msgBody {
@@ -87,9 +87,35 @@ body {
 	padding: 0;
 }
 </style>
+
+<script type="text/javascript" src="js/jquery-1.10.2.js"></script>
+<script type="text/javascript">
+	$(function() {
+		$("#addMsgOrCataGory").click(function() {
+			if (($("#board").val() == null) || ($("#board").val() == "")) {
+				alert("请输入有效信息");
+				return false;
+			}
+		});
+
+		$(".addToChat").click(function() {
+			var d = $(this).parent();
+			var content = $(d).find("textarea").val();
+			if (content == null || content == "") {
+				alert("请输入有效信息");
+				return false;
+			}
+		});
+	});
+</script>
+
+<script type="text/javascript">
+	
+</script>
+
 </head>
 <body>
-	
+
 	<span style="color: blue; font-size: 20px;">当前用户 ${currentUser}</span>
 	<br>
 	<br>
@@ -99,9 +125,9 @@ body {
 		<form action="MessageServlet">
 			<input type="hidden" name="from" value="${currentUser}"> <input
 				type="hidden" name="type" value="addCatagory">
-			<textarea name="msgContent" rows="3" cols="10" style="width: 100%;"></textarea>
-			<br>
-			<input type="submit" value="留言">
+			<textarea id="board" name="msgContent" rows="3" cols="10"
+				style="width: 100%;"></textarea>
+			<br> <input id="addMsgOrCataGory" type="submit" value="留言">
 		</form>
 	</div>
 	<br>
@@ -114,7 +140,7 @@ body {
 		<c:forEach items="${catagories}" var="c">
 			<div class="round catagory">
 				<div style="text-align: left; font-size: 20px;">
-					<span>第${c.id}楼(</span><span style="color: blue">${c.desc}</span>)
+					<img alt="" src="img/house_blue_24.png"><span>#${c.id}(</span><span style="color: blue">${c.desc}</span>)
 				</div>
 
 
@@ -131,7 +157,9 @@ body {
 									<div style="color: blue">
 										&nbsp;<img src="img/user.png" width="20px;" height="20px;" />&nbsp;${m.from}:
 									</div>
-									<div style="padding: 5px 10px;">${m.content}</div>
+									<div style="padding: 5px 10px;">
+										<img alt="" src="img/message_blue_24.png"> ${m.content}
+									</div>
 								</div>
 								<div class="msgTime">${m.time }</div>
 								<hr style="color: green;">
@@ -144,7 +172,8 @@ body {
 									<div style="color: blue">
 										<img src="img/user.png" width="20px;" height="20px;" />&nbsp;${m.from}:
 									</div>
-									<div style="padding: 5px 10px;">${m.content}</div>
+									<div style="padding: 5px 10px;">
+										<img alt="" src="img/message_blue_24.png">&nbsp;${m.content}</div>
 								</div>
 								<div class="msgTime">${m.time }</div>
 								<hr style="color: green;">
@@ -167,7 +196,9 @@ body {
 						src="img/edit_blue_48.png" />
 					<textarea name="content" rows="2" cols="10"
 						style="height: 50px; width: 400; margin-top: 5px;"></textarea>
-					<input type="submit" value="开始扯淡">
+
+
+					<input class="addToChat" type="submit" value="我也说一句">
 				</form>
 			</div>
 		</c:forEach>

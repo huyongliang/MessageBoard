@@ -35,7 +35,7 @@ public class RegisterServlet extends HttpServlet {
 				response.getWriter().println("注册成功<br>");
 				response.getWriter().println("<a href=\"index.jsp\">返回登录</a>");
 			} else {
-				response.getWriter().println("注册成功,稍后重试！");
+				response.getWriter().println("注册失败,稍后重试！");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

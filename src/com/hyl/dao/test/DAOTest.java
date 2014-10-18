@@ -12,6 +12,7 @@ import com.hyl.dao.UserDAOImpl;
 import com.hyl.model.Catagory;
 import com.hyl.model.Message;
 import com.hyl.model.User;
+import com.hyl.service.LoginService;
 
 public class DAOTest {
 	private Connection conn = null;
@@ -54,5 +55,12 @@ public class DAOTest {
 		Catagory c=new Catagory(0);
 		c.setDesc("sssssssssssssss");
 		System.out.println(new CatagoryDAOImpl(conn).addCatagory(c));
+	}
+	
+	
+	@Test
+	public void testLogin(){
+		System.out.println(new LoginService().loginValidate("ÇØË¸", "123"));
+//		System.out.println(new LoginService().loginValidate("ss", "sss"));
 	}
 }

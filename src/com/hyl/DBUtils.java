@@ -10,8 +10,10 @@ public class DBUtils {
 	public static Connection getConnection() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			return DriverManager.getConnection(
-					"jdbc:mysql://localhost:3306/messageBoard", "root", "123");
+			return DriverManager
+					.getConnection(
+							"jdbc:mysql://localhost:3306/MessageBoard?useUnicode=true&characterEncoding=utf8",
+							"root", "123");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
