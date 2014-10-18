@@ -1,7 +1,6 @@
 package com.hyl.service;
 
 import java.sql.Connection;
-import java.util.Date;
 
 import com.hyl.dao.CatagoryDAOImpl;
 import com.hyl.dao.MessageDAOImpl;

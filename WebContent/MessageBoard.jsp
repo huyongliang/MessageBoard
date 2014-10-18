@@ -16,6 +16,7 @@
 <style type="text/css">
 body {
 	text-align: center;
+	background-image: url("img/bg_blank.png");
 }
 
 .msgBody {
@@ -23,10 +24,12 @@ body {
 	padding-bottom: 5px;
 	padding-top: 5px;
 	margin-bottom: 5px;
+	vertical-align: middle;
 }
 
 .msgTime {
 	/* text-align: right; */
+	
 }
 
 .round {
@@ -40,6 +43,7 @@ body {
 .catagory {
 	width: 500px;
 	margin: 5px auto;
+	background-color: #4B83BC;
 }
 
 .msgOfMineBody {
@@ -67,20 +71,36 @@ body {
 .right {
 	text-align: right;
 }
+
+.msg {
+	border-bottom: 1px solid blue;
+	border-top: 1px solid blue;
+	-moz-border-radius: 15px;
+	-webkit-border-radius: 15px;
+	border-radius: 15px;
+}
+
+.messageBoard {
+	width: 500px;
+	margin: 10px auto;
+	background-color: #4B83BC;
+	padding: 0;
+}
 </style>
 </head>
 <body>
-	当前用户
-	<span style="color: blue; font-size: 20px;">${currentUser}</span>
+	
+	<span style="color: blue; font-size: 20px;">当前用户 ${currentUser}</span>
 	<br>
 	<br>
 
-	<div>
+	<div class="round messageBoard">
 		留言板:<br>
 		<form action="MessageServlet">
 			<input type="hidden" name="from" value="${currentUser}"> <input
 				type="hidden" name="type" value="addCatagory">
-			<textarea name="msgContent" rows="3" cols="10" style="width: 400px;"></textarea>
+			<textarea name="msgContent" rows="3" cols="10" style="width: 100%;"></textarea>
+			<br>
 			<input type="submit" value="留言">
 		</form>
 	</div>
@@ -102,13 +122,15 @@ body {
 
 
 
-					
+
 					<c:choose>
 						<c:when test="${index%2==0}">
 
 							<div class="msg left">
 								<div class="msgBody">
-									<div style="color: blue">${m.from}:</div>
+									<div style="color: blue">
+										&nbsp;<img src="img/user.png" width="20px;" height="20px;" />&nbsp;${m.from}:
+									</div>
 									<div style="padding: 5px 10px;">${m.content}</div>
 								</div>
 								<div class="msgTime">${m.time }</div>
@@ -119,7 +141,9 @@ body {
 
 							<div class="msg right">
 								<div class="msgBody">
-									<div style="color: blue">${m.from}:</div>
+									<div style="color: blue">
+										<img src="img/user.png" width="20px;" height="20px;" />&nbsp;${m.from}:
+									</div>
 									<div style="padding: 5px 10px;">${m.content}</div>
 								</div>
 								<div class="msgTime">${m.time }</div>
@@ -139,10 +163,10 @@ body {
 				<form action="MessageServlet">
 					<input type="hidden" name="type" value="addMsg"> <input
 						type="hidden" name="from" value="${currentUser}"> <input
-						type="hidden" name="cid" value="${c.id}">
-
-					<textarea name="content" rows="1" cols="10"
-						style="height: 30px; width: 400; margin-top: 5px;"></textarea>
+						type="hidden" name="cid" value="${c.id}"> <img
+						src="img/edit_blue_48.png" />
+					<textarea name="content" rows="2" cols="10"
+						style="height: 50px; width: 400; margin-top: 5px;"></textarea>
 					<input type="submit" value="开始扯淡">
 				</form>
 			</div>
