@@ -120,17 +120,7 @@ body {
 	<br>
 	<br>
 
-	<div class="round messageBoard">
-		留言板:<br>
-		<form action="MessageServlet">
-			<input type="hidden" name="from" value="${currentUser}"> <input
-				type="hidden" name="type" value="addCatagory">
-			<textarea id="board" name="msgContent" rows="3" cols="10"
-				style="width: 100%;"></textarea>
-			<br> <input id="addMsgOrCataGory" type="submit" value="留言">
-		</form>
-	</div>
-	<br>
+	
 
 	<c:if test="${catagories.size()<=0}">
 		<div>暂时没有留言，你可以做第一个留言者。</div>
@@ -204,5 +194,18 @@ body {
 		</c:forEach>
 
 	</div>
+	
+	
+	<div class="round messageBoard">
+		留言板:<br>
+		<form action="MessageServlet">
+			<input type="hidden" name="from" value="${currentUser}"> <input
+				type="hidden" name="type" value="addCatagory">
+			<textarea id="board" name="msgContent" rows="3" cols="10"
+				style="width: 100%;"></textarea>
+			<br> <input id="addMsgOrCataGory" type="submit" value="留言">
+		</form>
+	</div>
+	<br>
 </body>
 </html>
