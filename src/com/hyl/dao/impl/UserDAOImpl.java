@@ -1,11 +1,11 @@
-package com.hyl.dao;
+package com.hyl.dao.impl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import com.hyl.DBUtils;
+import com.hyl.dao.UserDAO;
 import com.hyl.model.User;
 
 public class UserDAOImpl implements UserDAO {
@@ -19,8 +19,7 @@ public class UserDAOImpl implements UserDAO {
 
 	@Override
 	public boolean doCreate(User user) {
-		String sql = "insert into user_t" + "(id,name,password) "
-				+ "values(null,?,?)";
+		String sql = "insert into user_t" + "(name,password) " + "values(?,?)";
 		PreparedStatement ps = null;
 
 		try {
@@ -30,8 +29,6 @@ public class UserDAOImpl implements UserDAO {
 			return ps.executeUpdate() > 0;
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally {
-			DBUtils.release(null, ps, null);
 		}
 
 		return false;
@@ -39,12 +36,12 @@ public class UserDAOImpl implements UserDAO {
 
 	@Override
 	public boolean doDelete(String userName) {
-		return false;
+		throw new UnsupportedOperationException("暂不实现此功能,因为并没有提供后台管理模块");
 	}
 
 	@Override
 	public User findByName(String userName) {
-		String sql = "select id ,name ,password from user_t"
+		String sql = "select name ,password from user_t"
 				+ " where name=? limit 1";
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -55,14 +52,11 @@ public class UserDAOImpl implements UserDAO {
 			rs = ps.executeQuery();
 			if (rs.next()) {
 				user = new User();
-				user.setId(rs.getInt(1));
-				user.setName(rs.getString(2));
-				user.setPassword(rs.getString(3));
+				user.setName(rs.getString(1));
+				user.setPassword(rs.getString(2));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally {
-			DBUtils.release(rs, ps, null);
 		}
 		return user;
 	}

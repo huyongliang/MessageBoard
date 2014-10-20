@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.hyl.DBUtils;
-import com.hyl.dao.UserDAOImpl;
+import com.hyl.dao.impl.UserDAOImpl;
 import com.hyl.model.User;
 
 public class RegisterServlet extends HttpServlet {

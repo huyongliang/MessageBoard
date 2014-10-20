@@ -1,3 +1,4 @@
+<%@page import="com.hyl.model.Message"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
@@ -120,7 +121,17 @@ body {
 	<br>
 	<br>
 
-	
+	<div class="round messageBoard">
+		留言板:<br>
+		<form action="MessageServlet">
+			<input type="hidden" name="from" value="${currentUser}"> <input
+				type="hidden" name="type" value="addCatagory">
+			<textarea id="board" name="msgContent" rows="3" cols="10"
+				style="width: 100%;"></textarea>
+			<br> <input id="addMsgOrCataGory" type="submit" value="留言">
+		</form>
+	</div>
+	<br>
 
 	<c:if test="${catagories.size()<=0}">
 		<div>暂时没有留言，你可以做第一个留言者。</div>
@@ -151,7 +162,8 @@ body {
 										<img alt="" src="img/message_blue_24.png"> ${m.content}
 									</div>
 								</div>
-								<div class="msgTime">${m.time }</div>
+								
+								<div class="msgTime">${m.time.toLocaleString() }</div>
 								<hr style="color: green;">
 							</div>
 						</c:when>
@@ -165,7 +177,7 @@ body {
 									<div style="padding: 5px 10px;">
 										<img alt="" src="img/message_blue_24.png">&nbsp;${m.content}</div>
 								</div>
-								<div class="msgTime">${m.time }</div>
+								<div class="msgTime">${m.time.toLocaleString() }</div>
 								<hr style="color: green;">
 							</div>
 
@@ -196,16 +208,6 @@ body {
 	</div>
 	
 	
-	<div class="round messageBoard">
-		留言板:<br>
-		<form action="MessageServlet">
-			<input type="hidden" name="from" value="${currentUser}"> <input
-				type="hidden" name="type" value="addCatagory">
-			<textarea id="board" name="msgContent" rows="3" cols="10"
-				style="width: 100%;"></textarea>
-			<br> <input id="addMsgOrCataGory" type="submit" value="留言">
-		</form>
-	</div>
-	<br>
+	
 </body>
 </html>

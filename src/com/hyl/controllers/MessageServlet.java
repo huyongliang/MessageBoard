@@ -1,18 +1,14 @@
 package com.hyl.controllers;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.hyl.DBUtils;
-import com.hyl.dao.MessageDAOImpl;
 import com.hyl.model.Message;
-import com.hyl.service.MessageService;
+import com.hyl.service.impl.MessageServiceImpl;
 
 public class MessageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -27,34 +23,24 @@ public class MessageServlet extends HttpServlet {
 			String from = request.getParameter("from");
 			System.out.println("=====:" + contetn);
 
-			Message message = new Message(0, 0, from, null, contetn, new Date());
-			Connection conn = DBUtils.getConnection();
-			try {
-				if (new MessageService(conn).addCatagoryAndMsg(message)) {
-					response.sendRedirect("ListMessageServlet");
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-			} finally {
-				DBUtils.release(null, null, conn);
+			Message message = new Message(0, 0, from, contetn, null);
+			if (new MessageServiceImpl().addNewCataAndMsg(message)) {
+				response.sendRedirect("ListMessageServlet");
+			} else {
+				response.getWriter().println("<h1>服务器异常，稍后重试</h1>");
 			}
 		} else if ("addMsg".equals(request.getParameter("type"))) {
 			String from = request.getParameter("from");
 			String content = request.getParameter("content");
 			String cidsString = request.getParameter("cid");
 			Message m = new Message(0, Integer.parseInt(cidsString.trim()),
-					from, null, content, new Date());
-			Connection conn = DBUtils.getConnection();
-			try {
-				if (new MessageDAOImpl(conn).doCreate(m)) {
-					response.sendRedirect("ListMessageServlet");
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-			} finally {
-				DBUtils.release(null, null, conn);
-			}
+					from, content, null);
+			if (new MessageServiceImpl().addMsgOnly(m)) {
+				response.sendRedirect("ListMessageServlet");
 
+			} else {
+				response.getWriter().println("<h1>服务器异常，稍后重试</h1>");
+			}
 		}
 	}
 

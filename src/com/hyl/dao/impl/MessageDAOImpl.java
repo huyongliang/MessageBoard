@@ -1,14 +1,17 @@
-package com.hyl.dao;
+package com.hyl.dao.impl;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.hyl.DBUtils;
+import com.hyl.dao.MessageDAO;
 import com.hyl.model.Message;
 
 public class MessageDAOImpl implements MessageDAO {
@@ -22,25 +25,26 @@ public class MessageDAOImpl implements MessageDAO {
 
 	@Override
 	public boolean doCreate(Message message) {
-		
+
 		String sql = "insert into message"
-				+ " (id,catagoryId,from_,to_,content,time_)"
-				+ " values(null,?,?,?,?,?)";
+				+ " (id,catagoryId,from_,content,time_)"
+				+ " values(null,?,?,?,?)";
 		PreparedStatement ps = null;
 
 		try {
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, message.getCatagoryId());
 			ps.setString(2, message.getFrom());
-			ps.setString(3, message.getTo());
-			ps.setString(4, message.getContent());
-			ps.setDate(5, new Date(new java.util.Date().getTime()));
+			ps.setString(3, message.getContent());
+			ps.setString(4, new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+					.format(new java.util.Date()));
 
 			return ps.executeUpdate() > 0;
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally {
-			DBUtils.release(null, ps, null);
+		}
+		finally{
+			DBUtils.release(ps);
 		}
 		return false;
 	}
@@ -48,8 +52,8 @@ public class MessageDAOImpl implements MessageDAO {
 	@Override
 	public List<Message> doList() {
 		List<Message> list = new ArrayList<>();
-		String sql = "select id,catagoryId,from_,to_,content,time_ from message"
-				+ " order by  catagoryId, id";
+		String sql = "select id,catagoryId,from_,content,time_ from message"
+				+ " order by  catagoryId desc, id asc";
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 
@@ -62,15 +66,20 @@ public class MessageDAOImpl implements MessageDAO {
 				m.setId(rs.getInt(1));
 				m.setCatagoryId(rs.getInt(2));
 				m.setFrom(rs.getString(3));
-				m.setTo(rs.getString(4));
-				m.setContent(rs.getString(5));
-				m.setTime(rs.getDate(6));
+				m.setContent(rs.getString(4));
+				String s=rs.getString(5);
+				Date d=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(s);
+				m.setTime(d);
 				list.add(m);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally {
-			DBUtils.release(rs, ps, null);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally{
+			DBUtils.release(rs, ps);
 		}
 		return list;
 	}

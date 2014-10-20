@@ -8,6 +8,12 @@ public class Catagory {
 	private String desc;
 	private List<Message> messages = new ArrayList<>();
 
+	public Catagory(int id, String desc) {
+		super();
+		this.id = id;
+		this.desc = desc;
+	}
+
 	public Catagory(int id, List<Message> messages) {
 		super();
 		this.id = id;

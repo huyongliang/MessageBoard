@@ -10,8 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.hyl.DBUtils;
-import com.hyl.dao.CatagoryDAOImpl;
+import com.hyl.dao.impl.CatagoryDAOImpl;
 import com.hyl.model.Catagory;
+import com.hyl.service.impl.CatagoryServiceImpl;
 
 public class ListMessageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -19,15 +20,12 @@ public class ListMessageServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		Connection conn = DBUtils.getConnection();
 		List<Catagory> catagories = null;
 		try {
-			catagories = new CatagoryDAOImpl(conn).doListCatagories();
+			catagories = new CatagoryServiceImpl().getAllCatagoriesWithMsg();
 		} catch (Exception e) {
 			e.printStackTrace();
-		} finally {
-			DBUtils.release(null, null, conn);
-		}
+		} 
 
 		request.setAttribute("catagories", catagories);
 		request.getRequestDispatcher("/MessageBoard.jsp").forward(request,

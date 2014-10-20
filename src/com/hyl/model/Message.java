@@ -6,7 +6,6 @@ public class Message {
 	private int id;
 	private int catagoryId;
 	private String from;
-	private String to;
 	private String content;
 	private Date time;
 
@@ -14,13 +13,12 @@ public class Message {
 		super();
 	}
 
-	public Message(int id, int catagoryId, String from, String to,
-			String content, Date time) {
+	public Message(int id, int catagoryId, String from, String content,
+			Date time) {
 		super();
 		this.id = id;
 		this.catagoryId = catagoryId;
 		this.from = from;
-		this.to = to;
 		this.content = content;
 		this.time = time;
 	}
@@ -31,14 +29,6 @@ public class Message {
 
 	public void setFrom(String from) {
 		this.from = from;
-	}
-
-	public String getTo() {
-		return to;
-	}
-
-	public void setTo(String to) {
-		this.to = to;
 	}
 
 	public Date getTime() {
@@ -76,8 +66,7 @@ public class Message {
 	@Override
 	public String toString() {
 		return "Message [id=" + id + ", catagoryId=" + catagoryId + ", from="
-				+ from + ", to=" + to + ", content=" + content + ", time="
-				+ time + "]";
+				+ from + ", content=" + content + ", time=" + time + "]";
 	}
 
 }

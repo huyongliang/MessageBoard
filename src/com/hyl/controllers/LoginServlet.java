@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.hyl.service.LoginService;
+import com.hyl.service.impl.LoginServiceImpl;
 
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -19,7 +19,7 @@ public class LoginServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		String pass = request.getParameter("password");
 		String userName = request.getParameter("userName");
-		if (new LoginService().loginValidate(userName, pass)) {
+		if (new LoginServiceImpl().loginValidate(userName, pass)) {
 			request.getSession(true);
 			request.getSession().setAttribute("currentUser", userName);
 
