@@ -1,21 +1,47 @@
 package com.hyl;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Properties;
 
 public class DBUtils {
-	public static Connection getConnection() {
+	private static String driverClassName = null;
+	private static String jdbcUrl = null;
+	private static String user = null;
+	private static String password = null;
+
+	static {
+		InputStream in = DBUtils.class.getClassLoader().getResourceAsStream(
+				"db.properties");
+		Properties properties = new Properties();
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			return DriverManager
-					.getConnection(
-							"jdbc:mysql://localhost:3306/MessageBoard?useUnicode=true&characterEncoding=utf8",
-							"root", "123");
-		} catch (Exception e) {
+			properties.load(in);
+			driverClassName = properties.getProperty("driverClass");
+			jdbcUrl = properties.getProperty("jdbcUrl");
+			user = properties.getProperty("user");
+			password = properties.getProperty("password");
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static Connection getConnection() {
+
+		// 读取类路径下的配置文件
+
+		try {
+			Class.forName(driverClassName);
+			return DriverManager.getConnection(jdbcUrl, user, password);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 		return null;
