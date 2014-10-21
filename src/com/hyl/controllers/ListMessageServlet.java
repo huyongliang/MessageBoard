@@ -1,7 +1,6 @@
 package com.hyl.controllers;
 
 import java.io.IOException;
-import java.sql.Connection;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -9,8 +8,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.hyl.DBUtils;
-import com.hyl.dao.impl.CatagoryDAOImpl;
 import com.hyl.model.Catagory;
 import com.hyl.service.impl.CatagoryServiceImpl;
 
