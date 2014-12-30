@@ -19,4 +19,4 @@ create table message(
 	foreign  key(catagoryId) references  catagory(id)
 );
 
-
+doubihyl
